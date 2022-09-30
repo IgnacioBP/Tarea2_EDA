@@ -1,12 +1,13 @@
 #include "lLists/stack.hpp"
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 
 
 using namespace eda;
 
 using namespace std;
+
 
 int main(){
   fstream entry;   //To the input file
@@ -22,28 +23,38 @@ int main(){
 
 
   string line;        // variable that recibe a line of text
-  char leter;
-  string word;
-  bool flag=false;
+  char leter;         // variable that recibe char by char in the line
+  string word;        // save the tag <expresion>
+  bool flag=false;    // indicate strart or end of a tag
 
   while (!entry.eof()){
     getline(entry,line);
     //cout<<line<<endl;
     for(int i=0;i<line.size();i++){
-      //cout<<line[i]<<endl;
       leter=line[i];
-      if(leter == '<'&& flag == false){
-        //cout<<"Comienzo detectado"<<endl;
+      if(leter == '<'&& flag == false){                      //Tag strart
         word += leter;
         flag=true;
       }
-      else if(leter=='>'&& flag == true){
+      else if(leter=='>'&& flag == true){                   //Tag end
+        word += leter;
+        //cout<<word<<endl;
+        
+        
+        
+        
+        word.erase(word.begin(),word.end());
+        flag=false;
+      }
+
+      else if(leter=='/'&& flag == true){//NO LISTO    //slash and revision condition
         //cout<<"Termino detectado"<<endl;
         word += leter;
         cout<<word<<endl;
         word.erase(word.begin(),word.end());
-        flag==false;
+        flag=false;
       }
+
       else if(leter!='>'&& leter!='<'&&flag==true){
         word += leter;
       }

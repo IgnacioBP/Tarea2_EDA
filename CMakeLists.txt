@@ -13,9 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #add_subdirectory(src)
 #add_subdirectory(tests)
 
-#add_executable(test tests/test.cpp src/node.cpp src/linkedList.cpp)
 add_executable(main tests/main.cpp src/node.cpp src/stack.cpp )
-#target_include_directories(test PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 
