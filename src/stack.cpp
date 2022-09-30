@@ -7,6 +7,10 @@
 
 #include "lLists/stack.hpp"
 #include <iostream>
+#include <string>
+
+using namespace std;
+
 
 namespace eda {
 
@@ -15,7 +19,7 @@ Stack::Stack():head(nullptr) {
 
 }
 
-void Stack::push(int val){
+void Stack::push(string val){
 	Node* node = new Node(val);
 	push(node);
 }

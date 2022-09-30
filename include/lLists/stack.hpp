@@ -9,6 +9,10 @@
 #define STACK_HPP_
 
 #include "lLists/node.hpp"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 namespace eda {
 
@@ -17,7 +21,7 @@ private:
 	Node* head;
 public:
 	Stack();
-	void push(int val);
+	void push(string val);
 	void push(Node* node);
 	void pop();
 	Node* top();

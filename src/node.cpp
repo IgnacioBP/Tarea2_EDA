@@ -4,14 +4,18 @@
 
 #include "lLists/node.hpp"
 #include <iostream>
+#include <string>
+
+using namespace std;
+
 
 namespace eda {
 
 
-Node::Node(): data(-1), ptrNext(nullptr) {
+Node::Node(): data("HOLDER"), ptrNext(nullptr) {
 }
 
-Node::Node(int val, Node* next): data(val), ptrNext(next) {
+Node::Node(string val, Node* next): data(val), ptrNext(next) {
 
 }
 
@@ -23,7 +27,7 @@ void Node::setNext(Node* next){
 	ptrNext = next;
 }
 
-int Node::getData(){
+string Node::getData(){
 	return data;
 }
 Node* Node::getNext(){
