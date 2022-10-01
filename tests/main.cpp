@@ -63,6 +63,8 @@ int main(){
             signal=false;
           }
           else{                                             //If diferent
+            word.insert(1,1,'/');
+            buffer.insert(1,1,'/');
             cout<<"ERROR en linea "<<count<< " : se ha recibido "<<word<<" se esperaba "<<buffer<<endl;
             out<<"ERROR en linea "<<count<< " : se ha recibido "<<word<<" se esperaba "<<buffer<<endl;
             error=true;
@@ -86,6 +88,19 @@ int main(){
         continue;
       }
     }
+  }
+
+  if(!tags.isEmpty()){
+    error=true;
+
+    cout<<"ERROR han quedado tags sin cerrar.Los tags no cerrados son: "<<endl;
+    out<<"ERROR han quedado tags sin cerrar.Los tags no cerrados son: "<<endl;
+    while(!tags.isEmpty()){
+      cout<<(tags.top())->getData()<<endl;
+      out<<(tags.top())->getData()<<endl;
+      tags.pop();
+    }
+
   }
 
   if (!error){
