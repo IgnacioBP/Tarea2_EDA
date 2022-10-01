@@ -11,9 +11,10 @@ using namespace std;
 
 int main(){
   fstream entry;   //To the input file
-  //ofstream out;  //To the output file
+  ofstream out;    //To the output file
 
   entry.open("../data.html");//This line open the file, we have to change it later to  recieva a name of a file
+  out.open("../salida.log");
 
   //Confirm if the file opens correctly
   if (entry.fail()){
@@ -21,18 +22,26 @@ int main(){
     exit(1);
   }
 
+  
+
+  
+
 
   string line;        // variable that recibe a line of text
   char leter;         // variable that recibe char by char in the line
+  
   string word;        // save the tag <expresion>
+
   bool flag=false;    // indicate strart or end of a tag
   bool signal=false;  //indicate that the tag is an ending 
+  bool error=false;
+  int  count=0;
+  Stack tags;
 
- Stack tags;
 
-
-  while (!entry.eof()){
+  while (!entry.eof() && !error){
     getline(entry,line);
+    count++;
     //cout<<line<<endl;
     for(int i=0;i<line.size();i++){
       
@@ -50,11 +59,13 @@ int main(){
           string buffer=(tags.top())->getData();
           if (buffer==word){                                //If equal   
             tags.pop();
-            cout<<buffer<<" cerrado con exito"<<endl;
+            out<<"tag "<<buffer<<" cerrado con exito"<<endl;
             signal=false;
           }
           else{                                             //If diferent
-            cerr<<"ERROR: se ha recibido "<<word<<" se esperaba "<<buffer;
+            cout<<"ERROR en linea "<<count<< " : se ha recibido "<<word<<" se esperaba "<<buffer<<endl;
+            out<<"ERROR en linea "<<count<< " : se ha recibido "<<word<<" se esperaba "<<buffer<<endl;
+            error=true;
           }
         }
         else{                                                //Push the word in the stack (SIGNAL OFF)
@@ -64,7 +75,7 @@ int main(){
         flag=false;
       }
 
-      else if(leter=='/'&& flag == true){                   //slash and revision condition(NO LISTO   )
+      else if(leter=='/'&& flag == true){                   //slash and revision condition(LISTO)
         signal=true;
       }
 
@@ -77,8 +88,11 @@ int main(){
     }
   }
 
+  if (!error){
+    out<<"0 errores detectados"<<endl;
+  }
   entry.close();
-
+  out.close();
 
 
 }
