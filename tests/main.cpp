@@ -3,17 +3,18 @@
 #include <fstream>
 #include <string>
 
-
 using namespace eda;
 
 using namespace std;
 
 
-int main(){
+int main( int nargs, char** vargs){
   fstream entry;   //To the input file
   ofstream out;    //To the output file
 
-  entry.open("../data.html");//This line open the file, we have to change it later to  recieva a name of a file
+  string nombre_archivo = vargs[1];
+
+  entry.open(nombre_archivo);//This line open the file, we have to change it later to  recieva a name of a file
   
   //Confirm if the file opens correctly
   if (entry.fail()){
@@ -21,18 +22,16 @@ int main(){
     exit(1);
   }
 
-  out.open("../salida.log");
+  std::string::size_type const p(nombre_archivo.find_last_of('.'));
+  std::string file_without_extension = nombre_archivo.substr(0, p);
+
+  std::string nombre_f= file_without_extension + ".log";
+  out.open(nombre_f);
 
   if (out.fail()){
     cerr<<"Error al abrir el archivo";
     exit(1);
   }
-
-
-  
-
-  
-
 
   string line;        // variable that recibe a line of text
   char leter;         // variable that recibe char by char in the line
