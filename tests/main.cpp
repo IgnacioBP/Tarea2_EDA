@@ -14,7 +14,7 @@ int main( int nargs, char** vargs){
 
   string nombre_archivo = vargs[1];
 
-  entry.open(nombre_archivo);//This line open the file, we have to change it later to  recieva a name of a file
+  entry.open(nombre_archivo);//This line open the file 
   
   //Confirm if the file opens correctly
   if (entry.fail()){
