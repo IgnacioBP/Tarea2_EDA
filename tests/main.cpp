@@ -14,13 +14,20 @@ int main(){
   ofstream out;    //To the output file
 
   entry.open("../data.html");//This line open the file, we have to change it later to  recieva a name of a file
-  out.open("../salida.log");
-
+  
   //Confirm if the file opens correctly
   if (entry.fail()){
     cerr<<"Error al abrir el archivo";
     exit(1);
   }
+
+  out.open("../salida.log");
+
+  if (out.fail()){
+    cerr<<"Error al abrir el archivo";
+    exit(1);
+  }
+
 
   
 
@@ -90,9 +97,9 @@ int main(){
     }
   }
 
-  if(!tags.isEmpty()){
-    error=true;
+  
 
+  if(!tags.isEmpty() && !error){
     cout<<"ERROR han quedado tags sin cerrar.Los tags no cerrados son: "<<endl;
     out<<"ERROR han quedado tags sin cerrar.Los tags no cerrados son: "<<endl;
     while(!tags.isEmpty()){
@@ -100,12 +107,14 @@ int main(){
       out<<(tags.top())->getData()<<endl;
       tags.pop();
     }
-
+    error=true;
   }
 
   if (!error){
     out<<"0 errores detectados"<<endl;
   }
+
+  
   entry.close();
   out.close();
 
